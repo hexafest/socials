@@ -28,12 +28,14 @@ const SITE_DESCRIPTION =
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://socials.hexafalls.org";
 
-const OG_IMAGE = "https://hexafalls.org/banners/og-banner.png";
+// Served from /public/og-image.png (resolved to an absolute URL via metadataBase).
+const OG_IMAGE = "/og-image.png";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: `${SITE_NAME} · Follow the keep`,
   description: SITE_DESCRIPTION,
+  alternates: { canonical: "/" },
   applicationName: SITE_NAME,
   keywords: [
     "HexaFalls",
@@ -58,7 +60,7 @@ export const metadata = {
     description: SITE_DESCRIPTION,
     url: SITE_URL,
     locale: "en_IN",
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: SITE_NAME }],
+    images: [{ url: OG_IMAGE, width: 1843, height: 887, alt: SITE_NAME }],
   },
   twitter: {
     card: "summary_large_image",
