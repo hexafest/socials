@@ -13,7 +13,6 @@ import { SOCIALS } from "@/lib/socials";
 
 export default function Socials() {
   const sectionRef = useRef(null);
-  const subRef = useRef(null);
   const cursorRef = useRef(null);
 
   // GSAP letter-stagger reveal for the headline (opacity + y + rotateX only).
@@ -22,7 +21,7 @@ export default function Socials() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const ctx = gsap.context(() => {
       if (reduce) {
-        gsap.set([".hp-letter", subRef.current], { opacity: 1, y: 0 });
+        gsap.set(".hp-letter", { opacity: 1, y: 0 });
         return;
       }
       gsap.set(".hp-letter", { opacity: 0, y: 28, rotateX: -60 });
@@ -34,13 +33,6 @@ export default function Socials() {
         ease: "power3.out",
         stagger: { each: 0.045, from: "start" },
         delay: 0.2,
-      });
-      gsap.from(subRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 0.45,
-        delay: 0.3,
-        ease: "power2.out",
       });
     }, sectionRef);
     return () => ctx.revert();
@@ -219,20 +211,52 @@ export default function Socials() {
         style={{ animationDuration: "12s" }}
       />
       <RoughStar
-        size={32}
-        color="#D4AF37"
-        fill
-        seed={79}
-        className="absolute top-40 right-8 sm:right-16 opacity-80 hp-float"
-        style={{ animationDuration: "14s", animationDelay: "1.5s" }}
-      />
-      <RoughStar
         size={20}
         color="#66FCF1"
         seed={83}
         className="absolute bottom-32 left-12 opacity-60 hp-float"
         style={{ animationDuration: "10s", animationDelay: "2s" }}
       />
+
+      {/* ── Register Now — a tavern sign hanging from the sky, swinging gently ── */}
+      {primary && (
+        <div className="pointer-events-none absolute top-0 right-3 sm:right-[6%] z-30">
+          <div className="hp-sway flex flex-col items-center" style={{ transformOrigin: "top center" }}>
+            {/* ropes + peg */}
+            <svg
+              width="200"
+              height="44"
+              viewBox="0 0 200 44"
+              className="overflow-visible"
+              aria-hidden="true"
+            >
+              <circle cx="100" cy="3" r="3.4" fill="#D4AF37" />
+              <circle cx="100" cy="3" r="6" fill="none" stroke="#D4AF37" strokeWidth="1" strokeOpacity="0.45" />
+              <line x1="100" y1="5" x2="24" y2="42" stroke="#D4AF37" strokeWidth="1.6" strokeOpacity="0.85" />
+              <line x1="100" y1="5" x2="176" y2="42" stroke="#D4AF37" strokeWidth="1.6" strokeOpacity="0.85" />
+            </svg>
+            <div className="pointer-events-auto -mt-1 flex flex-col items-center">
+              <RoughButton
+                as="a"
+                href={primary.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                color={primary.color}
+                glow={primary.glow}
+                shimmer
+                seed={7}
+                className="w-[200px] px-5 py-4 text-[12px] tracking-[0.32em]"
+              >
+                <SocialIcon name={primary.icon} className="h-4 w-4" />
+                REGISTER NOW <span>↗</span>
+              </RoughButton>
+              <span className="mt-1.5 font-wizard text-[11px] text-gold-hp/70">
+                {primary.handle}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Crest / logo */}
       <motion.a
@@ -288,53 +312,17 @@ export default function Socials() {
             {splitLetters("· Socials ·")}
           </span>
         </h1>
-
-        <p
-          ref={subRef}
-          className="mt-6 max-w-xl mx-auto text-base sm:text-lg font-wizard text-silver-hp/80"
-        >
-          Owls fly in every direction. Follow the keep across the realms — and
-          when you&apos;re ready, sign the scroll.
-        </p>
       </motion.div>
 
-      {/* Primary CTA — Register Now */}
-      {primary && (
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.5 }}
-          className="mt-9 w-full max-w-md"
-        >
-          <RoughButton
-            as="a"
-            href={primary.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            color={primary.color}
-            glow={primary.glow}
-            shimmer
-            seed={7}
-            className="w-full px-8 py-5 text-[14px] sm:text-[15px] tracking-[0.4em]"
-          >
-            <SocialIcon name={primary.icon} className="h-5 w-5" />
-            REGISTER NOW <span>↗</span>
-          </RoughButton>
-          <p className="mt-2 text-center font-wizard text-[12px] text-gold-hp/70">
-            {primary.handle}
-          </p>
-        </motion.div>
-      )}
-
       {/* Divider */}
-      <div className="mt-10 mb-2 flex justify-center">
+      <div className="mt-10 mb-8 flex justify-center">
         <RoughDivider width={300} height={40} color="#D4AF37" ornament="✦" seed={19} />
       </div>
 
-      {/* Social link grid */}
-      <div className="grid w-full max-w-3xl gap-4 sm:gap-5 sm:grid-cols-2">
+      {/* Social links — centered, side-by-side, wraps responsively */}
+      <div className="flex w-full max-w-4xl flex-wrap items-stretch justify-center gap-3.5 sm:gap-4">
         {links.map((s, i) => {
-          const tiltDeg = [-1.5, 1.5, -1, 1][i % 4];
+          const tiltDeg = [-1.6, 1.5, -1, 1.2, -1.3][i % 5];
           return (
             <motion.a
               key={s.id}
@@ -345,18 +333,18 @@ export default function Socials() {
               whileInView={{ opacity: 1, y: 0, rotate: tiltDeg }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.35, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative block hover:transform-[rotate(0deg)_translateY(-4px)] transition-transform duration-300"
+              className="group relative block w-[150px] hover:transform-[rotate(0deg)_translateY(-4px)] transition-transform duration-300"
               style={{ transformOrigin: "center center", willChange: "transform" }}
               aria-label={`${s.label} — ${s.handle}`}
             >
               <div
-                className="relative flex items-center gap-4 overflow-hidden rounded-[3px] bg-slate-hp/35 px-5 py-4 backdrop-blur-sm"
+                className="relative flex h-full flex-col items-center gap-2.5 overflow-hidden rounded-[3px] bg-slate-hp/35 px-3 py-5 text-center backdrop-blur-sm"
                 style={{
                   border: `1px solid ${s.color}55`,
                   boxShadow: `0 4px 18px rgba(0,0,0,0.45), 0 0 14px ${s.glow}`,
                 }}
               >
-                <RoughCorners color={s.color} length={16} inset={4} seed={31 + i * 7} />
+                <RoughCorners color={s.color} length={15} inset={4} seed={31 + i * 7} />
 
                 {/* shimmer sweep on hover */}
                 <span
@@ -369,7 +357,7 @@ export default function Socials() {
 
                 {/* icon medallion */}
                 <span
-                  className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full"
+                  className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-110"
                   style={{
                     color: s.color,
                     border: `1px solid ${s.color}66`,
@@ -380,24 +368,17 @@ export default function Socials() {
                   <SocialIcon name={s.icon} className="h-6 w-6" />
                 </span>
 
-                <span className="relative z-10 flex flex-col">
-                  <span
-                    className="font-display font-bold tracking-wide text-[15px]"
-                    style={{ color: "#e8dcc8" }}
-                  >
-                    {s.label}
-                  </span>
-                  <span className="font-wizard text-[13px]" style={{ color: `${s.color}cc` }}>
-                    {s.handle}
-                  </span>
-                </span>
-
                 <span
-                  className="relative z-10 ml-auto text-lg transition-transform duration-300 group-hover:translate-x-1"
-                  style={{ color: s.color }}
-                  aria-hidden="true"
+                  className="relative z-10 font-display font-bold tracking-wide text-[14px] leading-tight"
+                  style={{ color: "#e8dcc8" }}
                 >
-                  ↗
+                  {s.label}
+                </span>
+                <span
+                  className="relative z-10 font-wizard text-[12px] leading-tight"
+                  style={{ color: `${s.color}cc` }}
+                >
+                  {s.handle}
                 </span>
               </div>
             </motion.a>

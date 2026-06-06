@@ -1,0 +1,54 @@
+name: Deploy
+
+# Deploys the socials hub to Cloudflare on every push to `main`.
+# Required repo secrets (Settings → Secrets and variables → Actions):
+#   CLOUDFLARE_API_TOKEN   — token with Workers Scripts:Edit (and the
+#                            hexafalls.org zone if you bind the custom domain
+#                            via wrangler.toml instead of the dashboard).
+#   CLOUDFLARE_ACCOUNT_ID  — cff05656defae2b11d149fd3cc17f5c7
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Production
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      deployments: write
+    environment:
+      name: production
+      url: https://socials.hexafalls.org
+    env:
+      CLOUDFLARE_API_TOKEN:  ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      NEXT_TELEMETRY_DISABLED: 1
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Verify Cloudflare secrets are present
+        run: |
+          if [ -z "${CLOUDFLARE_API_TOKEN:-}" ];  then echo "::error::CLOUDFLARE_API_TOKEN repo secret is missing.";  exit 1; fi
+          if [ -z "${CLOUDFLARE_ACCOUNT_ID:-}" ]; then echo "::error::CLOUDFLARE_ACCOUNT_ID repo secret is missing."; exit 1; fi
+
+      - name: Install
+        run: npm ci
+
+      - name: Build via OpenNext
+        run: npx opennextjs-cloudflare build
+
+      - name: Deploy to Cloudflare
+        run: npx wrangler deploy

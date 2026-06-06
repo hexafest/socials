@@ -97,6 +97,39 @@ html, body {
   100% { transform: translateX(500%); }
 }
 
+/* Magical underline used on footer links */
+.hp-underline { position: relative; }
+.hp-underline::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -6px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--hx-cyan), transparent);
+  opacity: .8;
+}
+
+/* Gentle pendulum sway for the hanging "Register Now" sign. Pivots from the
+   peg at the very top so the board + ropes swing as one. */
+@keyframes hp-sway {
+  0%, 100% { transform: rotate(-2.4deg); }
+  50%      { transform: rotate(2.4deg); }
+}
+.hp-sway {
+  animation: hp-sway 5.5s ease-in-out infinite;
+  transform-origin: top center;
+  will-change: transform;
+}
+
+/* Skip painting the offscreen footer until it scrolls into view. */
+.cv-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hp-sway { animation: none; }
+}
+
 /* Sparkle drift — pure CSS, compositor-only (transform + opacity). */
 @keyframes hp-spark {
   0%, 100% { opacity: 0; transform: translateY(-6px); }

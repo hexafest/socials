@@ -33,7 +33,14 @@ directory = ".open-next/assets"
 enabled            = true
 head_sampling_rate = 1
 
-# Bind socials.hexafalls.org to this Worker on every prod deploy.
-[[routes]]
-pattern        = "socials.hexafalls.org"
-custom_domain  = true
+# Custom domain — set manually in the Cloudflare dashboard
+# (Workers & Pages → hexafalls-socials → Settings → Domains & Routes → Add →
+#  Custom Domain → socials.hexafalls.org).
+#
+# Prefer to manage it in config instead? Uncomment the block below and the
+# next deploy will bind it automatically (the API token then also needs the
+# hexafalls.org zone).
+#
+# [[routes]]
+# pattern        = "socials.hexafalls.org"
+# custom_domain  = true
