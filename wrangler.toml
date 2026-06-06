@@ -1,0 +1,39 @@
+# Cloudflare Worker config for the HexaFalls socials hub.
+#
+# Worker name : `hexafalls-socials`
+# Workers URL : https://hexafalls-socials.<account-subdomain>.workers.dev
+#
+# Deploy: `npm run deploy` (runs `opennextjs-cloudflare build && deploy`).
+#         Reads CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID from the env
+#         (see .env.local — export them into the shell before deploying).
+#
+# Custom domain:
+#   socials.hexafalls.org  (route below — zone hexafalls.org must be on the
+#                           same Cloudflare account as account_id).
+#
+# Docs: https://developers.cloudflare.com/workers/configuration/routing/custom-domains/
+
+name                 = "hexafalls-socials"
+main                 = ".open-next/worker.js"
+compatibility_date   = "2026-04-01"
+compatibility_flags  = ["nodejs_compat", "global_fetch_strictly_public"]
+
+# Account that owns the hexafalls.org zone.
+account_id           = "cff05656defae2b11d149fd3cc17f5c7"
+
+# Keep the workers.dev preview URL live alongside the custom domain.
+workers_dev = true
+
+# Static assets emitted by @opennextjs/cloudflare
+[assets]
+binding   = "ASSETS"
+directory = ".open-next/assets"
+
+[observability]
+enabled            = true
+head_sampling_rate = 1
+
+# Bind socials.hexafalls.org to this Worker on every prod deploy.
+[[routes]]
+pattern        = "socials.hexafalls.org"
+custom_domain  = true
