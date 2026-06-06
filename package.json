@@ -1,6 +1,6 @@
 {
   "name": "hexafalls-socials",
-  "version": "1.0.0",
+  "version": "1.1.12",
   "private": true,
   "description": "HexaFalls socials hub — a one-page wizarding-themed link page for socials.hexafalls.org. Next.js + Tailwind app deployed on Cloudflare via OpenNext.",
   "keywords": [
@@ -34,18 +34,19 @@
   "dependencies": {
     "framer-motion": "^12.38.0",
     "gsap": "^3.15.0",
-    "next": "16.2.4",
+    "next": "^16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "roughjs": "^4.6.6"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "@opennextjs/cloudflare": "^1.19.5",
     "@tailwindcss/postcss": "^4",
     "@types/node": "25.6.0",
     "@types/react": "19.2.14",
     "eslint": "^9",
-    "eslint-config-next": "16.2.4",
+    "eslint-config-next": "^16.2.6",
     "tailwindcss": "^4",
     "wrangler": "^4.87.0"
   }
