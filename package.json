@@ -2,22 +2,40 @@
   "name": "hexafalls-socials",
   "version": "1.1.12",
   "private": true,
-  "description": "HexaFalls socials hub — a one-page wizarding-themed link page for socials.hexafalls.org. Next.js + Tailwind app deployed on Cloudflare via OpenNext.",
+  "description": "HexaFalls socials hub — a one-page wizarding-themed link page for socials.hexafalls.org. Mirrors the hexafalls.org hero look (Next.js + Tailwind), deployed on Cloudflare via OpenNext.",
   "keywords": [
     "hexafalls",
     "socials",
     "linktree",
+    "hackathon",
+    "techfest",
+    "jis-university",
+    "gdg",
+    "kolkata",
     "nextjs",
     "tailwindcss",
     "cloudflare",
     "opennext"
   ],
   "homepage": "https://socials.hexafalls.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hexafest/hexafalls.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hexafest/hexafalls/issues"
+  },
   "author": {
     "name": "Ayushman Bhattacharya (@elixpo)",
     "email": "ayushman@myceli.ai",
     "url": "https://github.com/Circuit-Overtime"
   },
+  "contributors": [
+    {
+      "name": "GDG on Campus · JIS University",
+      "url": "https://gdg.community.dev/gdg-on-campus-jis-university-kolkata-india/"
+    }
+  ],
   "license": "UNLICENSED",
   "engines": {
     "node": ">=20"
