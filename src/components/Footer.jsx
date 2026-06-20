@@ -10,7 +10,7 @@ import RoughTape from "./RoughTape";
 const EMAIL = "support@hexafalls.org";
 const GDG_LINK = "https://gdg.community.dev/gdg-on-campus-jis-university-kolkata-india/";
 const GITHUB_ORG = "https://github.com/hexafest";
-const MAIN_LOGO = "https://hexafalls.org/logos/main_logo.png";
+const MAIN_LOGO = "/main_logo_transparent.png?v=2";
 
 const SOCIALS = [
   {
@@ -57,15 +57,6 @@ const SOCIALS = [
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-4 w-4">
         <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/>
-      </svg>
-    ),
-  },
-  {
-    name: "GitHub",
-    href: GITHUB_ORG,
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-4 w-4">
-        <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.05c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.35.78 1.05.78 2.11v3.13c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
       </svg>
     ),
   },
@@ -144,7 +135,7 @@ export default function Footer() {
           </span>
         </a>
         <p className="font-wizard text-sm text-silver-hp/60 max-w-md leading-relaxed">
-          A wizarding hackathon, conjured by GDG on Campus · JIS University.
+          A wizarding hackathon, Conjuring by JIS University.<br />
           More scrolls of prophecy unfurling soon.
         </p>
 
@@ -212,7 +203,9 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   aria-label={s.label}
                   className={`relative inline-flex h-9 w-9 items-center justify-center rounded-full border transition ${
-                    s.soon
+                    s.color === "red"
+                      ? "border-red-500/40 bg-red-500/10 text-red-500 hover:border-red-500/70 hover:bg-red-500/15 hover:shadow-[0_0_18px_rgba(239,68,68,0.3)]"
+                      : s.soon
                       ? "border-gold-hp/35 bg-gold-hp/10 text-gold-hp/85 hover:border-gold-hp/70 hover:bg-gold-hp/15 hover:shadow-[0_0_18px_rgba(212,175,55,0.3)]"
                       : "border-cyan-hp/40 bg-cyan-hp/10 text-cyan-hp hover:border-cyan-hp/70 hover:bg-cyan-hp/15 hover:shadow-[0_0_18px_rgba(102,252,241,0.3)]"
                   }`}
@@ -227,7 +220,9 @@ export default function Footer() {
                 >
                   <div
                     className={`relative whitespace-nowrap rounded-md border bg-midnight/95 backdrop-blur-sm px-2.5 py-1.5 font-display text-[10px] uppercase tracking-[0.3em] shadow-[0_4px_24px_rgba(0,0,0,0.6)] ${
-                      s.soon
+                      s.color === "red"
+                        ? "border-red-500/50 text-red-500 shadow-[0_0_10px_rgba(239,68,68,0.4)]"
+                        : s.soon
                         ? "border-gold-hp/50 text-gold-hp hp-glow-gold"
                         : "border-cyan-hp/50 text-cyan-hp hp-glow"
                     }`}
@@ -237,7 +232,7 @@ export default function Footer() {
                     <span
                       aria-hidden="true"
                       className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-2 w-2 rotate-45 border-r border-b bg-midnight/95 ${
-                        s.soon ? "border-gold-hp/50" : "border-cyan-hp/50"
+                        s.color === "red" ? "border-red-500/50" : s.soon ? "border-gold-hp/50" : "border-cyan-hp/50"
                       }`}
                     />
                   </div>
@@ -258,17 +253,10 @@ export default function Footer() {
           <div className="font-display text-[11px] uppercase tracking-[0.4em] text-cyan-hp/70">
             The Order
           </div>
-          <a
-            href={GDG_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hp-underline group inline-flex items-center gap-2 text-sm text-silver-hp/85 hover:text-cyan-hp transition"
+          <span
+            className="hp-underline group inline-flex items-center gap-2 text-sm text-silver-hp/85 hover:text-cyan-hp transition cursor-default"
           >
-            GDG on Campus · JIS University
-            <span className="text-cyan-hp/70 group-hover:translate-x-0.5 transition">↗</span>
-          </a>
-          <span className="font-wizard text-[11px] text-silver-hp/40 italic">
-            join the chapter
+            Dept. of CSE • JIS University
           </span>
         </motion.div>
       </div>
