@@ -270,7 +270,7 @@ export default function Socials() {
         aria-label="HexaFalls home"
       >
         <img
-          src="https://hexafalls.org/logos/main_logo.png"
+          src="/main_logo_transparent.png?v=2"
           alt="HexaFalls"
           className="block h-full w-full object-contain p-2 transition duration-300 group-hover:scale-105"
           style={{ filter: "drop-shadow(0 0 8px rgba(102,252,241,0.25))" }}
