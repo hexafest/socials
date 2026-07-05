@@ -14,7 +14,7 @@ export const SITEMAP = [
     ),
   },
   {
-    href: `${MAIN_SITE}/timeline`, label: "Timeline", soon: true,
+    href: `${MAIN_SITE}/timeline`, label: "Timeline",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
         <circle cx="12" cy="12" r="9" />
@@ -23,7 +23,7 @@ export const SITEMAP = [
     ),
   },
   {
-    href: `${MAIN_SITE}/events`, label: "The Events", soon: true,
+    href: `${MAIN_SITE}/events`, label: "The Events",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
         <path d="M5 4h14a2 2 0 0 1 2 2v3H3V6a2 2 0 0 1 2-2z" />

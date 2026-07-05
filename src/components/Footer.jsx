@@ -10,7 +10,7 @@ import RoughTape from "./RoughTape";
 const EMAIL = "support@hexafalls.org";
 const GDG_LINK = "https://gdg.community.dev/gdg-on-campus-jis-university-kolkata-india/";
 const GITHUB_ORG = "https://github.com/hexafest";
-const MAIN_LOGO = "/main_logo_transparent.png?v=2";
+const MAIN_LOGO = "/main_logo_transparent.png?v=3";
 
 const SOCIALS = [
   {
