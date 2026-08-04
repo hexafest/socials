@@ -230,10 +230,10 @@ export default function Socials() {
               className="overflow-visible"
               aria-hidden="true"
             >
-              <circle cx="100" cy="3" r="3.4" fill="#D4AF37" />
-              <circle cx="100" cy="3" r="6" fill="none" stroke="#D4AF37" strokeWidth="1" strokeOpacity="0.45" />
-              <line x1="100" y1="5" x2="24" y2="42" stroke="#D4AF37" strokeWidth="1.6" strokeOpacity="0.85" />
-              <line x1="100" y1="5" x2="176" y2="42" stroke="#D4AF37" strokeWidth="1.6" strokeOpacity="0.85" />
+              <circle cx="100" cy="3" r="3.4" fill="#EF4444" />
+              <circle cx="100" cy="3" r="6" fill="none" stroke="#EF4444" strokeWidth="1" strokeOpacity="0.45" />
+              <line x1="100" y1="5" x2="24" y2="42" stroke="#EF4444" strokeWidth="1.6" strokeOpacity="0.85" />
+              <line x1="100" y1="5" x2="176" y2="42" stroke="#EF4444" strokeWidth="1.6" strokeOpacity="0.85" />
             </svg>
             <div className="pointer-events-auto -mt-1 flex flex-col items-center">
               <RoughButton
@@ -247,10 +247,10 @@ export default function Socials() {
                 seed={7}
                 className="w-[200px] px-5 py-4 text-[12px] tracking-[0.32em]"
               >
-                <SocialIcon name={primary.icon} className="h-4 w-4" />
-                REGISTER NOW <span>↗</span>
+                <SocialIcon name={primary.icon} className="h-4 w-4 text-red-100" />
+                <span className="text-red-100 drop-shadow-md">REGISTRATION CLOSED <span>↗</span></span>
               </RoughButton>
-              <span className="mt-1.5 font-wizard text-[11px] text-gold-hp/70">
+              <span className="mt-1.5 font-wizard text-[11px] text-red-200/90 drop-shadow-sm">
                 {primary.handle}
               </span>
             </div>
