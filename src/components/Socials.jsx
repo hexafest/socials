@@ -236,20 +236,25 @@ export default function Socials() {
               <line x1="100" y1="5" x2="176" y2="42" stroke="#EF4444" strokeWidth="1.6" strokeOpacity="0.85" />
             </svg>
             <div className="pointer-events-auto -mt-1 flex flex-col items-center">
-              <RoughButton
-                as="a"
-                href={primary.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                color={primary.color}
-                glow={primary.glow}
-                shimmer
-                seed={7}
-                className="w-[200px] px-5 py-4 text-[12px] tracking-[0.32em]"
-              >
-                <SocialIcon name={primary.icon} className="h-4 w-4 text-red-100" />
-                <span className="text-red-100 drop-shadow-md">REGISTRATION CLOSED <span>↗</span></span>
-              </RoughButton>
+              <div className="relative">
+                <RoughButton
+                  as="div"
+                  color={primary.color}
+                  glow={primary.glow}
+                  seed={7}
+                  className="w-[200px] px-5 py-4 text-[12px] tracking-[0.32em] cursor-not-allowed opacity-80"
+                >
+                  <SocialIcon name={primary.icon} className="h-4 w-4 text-red-100" />
+                  <span className="text-red-100 drop-shadow-md">REGISTRATION</span>
+                </RoughButton>
+                {/* ── CLOSED badge ── */}
+                <span
+                  className="absolute -top-2 -right-4 z-20 rounded-sm border border-red-400/50 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-red-100 shadow-lg backdrop-blur-md"
+                  style={{ transform: "rotate(12deg)", background: "rgba(220, 38, 38, 0.35)" }}
+                >
+                  Closed
+                </span>
+              </div>
               <span className="mt-1.5 font-wizard text-[11px] text-red-200/90 drop-shadow-sm">
                 {primary.handle}
               </span>
