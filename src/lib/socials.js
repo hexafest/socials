@@ -61,3 +61,4 @@ export const SOCIALS = [
 ];
 
 export default SOCIALS;
+
