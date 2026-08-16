@@ -40,15 +40,23 @@ jobs:
           cache: npm
 
       - name: Verify Cloudflare secrets are present
+        id: verify-secrets
         run: |
-          if [ -z "${CLOUDFLARE_API_TOKEN:-}" ];  then echo "::error::CLOUDFLARE_API_TOKEN repo secret is missing.";  exit 1; fi
-          if [ -z "${CLOUDFLARE_ACCOUNT_ID:-}" ]; then echo "::error::CLOUDFLARE_ACCOUNT_ID repo secret is missing."; exit 1; fi
+          if [ -n "${CLOUDFLARE_API_TOKEN:-}" ] && [ -n "${CLOUDFLARE_ACCOUNT_ID:-}" ]; then
+            echo "has_secrets=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::Cloudflare secrets are missing. Skipping production deploy."
+            echo "has_secrets=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Install
+        if: steps.verify-secrets.outputs.has_secrets == 'true'
         run: npm ci
 
       - name: Build via OpenNext
+        if: steps.verify-secrets.outputs.has_secrets == 'true'
         run: npx opennextjs-cloudflare build
 
       - name: Deploy to Cloudflare
+        if: steps.verify-secrets.outputs.has_secrets == 'true'
         run: npx wrangler deploy
